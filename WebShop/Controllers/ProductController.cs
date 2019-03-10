@@ -187,9 +187,11 @@ namespace WebShop.Controllers
                     CreatedOn = item.CreatedOn,
                     Description = item.Description,
                     Price = item.Price,
-                    IsInCart = userProfile
-                    .Cart.ProductInCarts
-                    .Any(p => p.ProductId == item.ProductId)
+                    IsInCart = userProfile != null ?
+                    userProfile
+                    .Cart
+                    .ProductInCarts
+                    .Any(p => p.ProductId == item.ProductId) : false
                 });
             }
 
