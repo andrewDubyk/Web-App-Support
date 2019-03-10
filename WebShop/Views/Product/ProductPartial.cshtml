@@ -1,0 +1,71 @@
+﻿@model WebShop.Extensions.PaginatedList<ProductViewModel>
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var index = 0;
+}
+
+<div>
+    @if (Model.Count == 0)
+    {
+        <h1>Sorry, no Prdoucts with that description:</h1>
+        <h2><i>@ViewData["CurrentFilter"]</i></h2>
+    }
+    @foreach (var item in Model)
+    {
+        <div class="well well-sm card bg-light-aqua">
+            <div class="card-body">
+                <h3 class="card-title">@item.Title</h3>
+                <p class="card-text">@item.Description</p>
+                <h4>$@item.Price</h4>
+                <hr />
+                <ul class="list-inline">
+                    <li><a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-primary">Details</a></li>
+                    @if (User.IsInRole(Roles.Admin.ToString()))
+                    {
+                        <li><a asp-controller="Product" asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a></li>
+                        <li><a asp-controller="Product" asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-primary">Delete</a></li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var liId = "cartStatus" + index.ToString();
+                        <li id="@liId">
+                            @if (!item.IsInCart)
+                            {
+                                <button type="button" onclick="addToCart('@index','@item.ProductId')" class="btn btn-success">To cart</button>
+                            }
+                            else
+                            {
+                                <i class="fa fa-check fa-1x" style="color:green"></i>
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        index++;
+    }
+
+</div>
+<br /><br />
+<div class="center-block text-center">
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a onclick="updateData(this, '@ViewData["CurrentFilter"]','@(Model.PageIndex - 1)','@UserManager.GetUserId(User)')"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a id="pageIndex" style="cursor: default;text-decoration: none;">  @Model.PageIndex  </a>
+    <a onclick="updateData(this, '@ViewData["CurrentFilter"]','@(Model.PageIndex + 1)','@UserManager.GetUserId(User)')"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+</div>
+
+<script>
+
+</script>
