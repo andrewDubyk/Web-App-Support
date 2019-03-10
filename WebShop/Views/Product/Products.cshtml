@@ -13,26 +13,33 @@
             <li class="list-group-item text-muted" contenteditable="false">Filters</li>
             <li class="list-group-item text-left">
                 Price<br />
-                <a onclick="updateData(this, '@ViewData["CurrentFilter"]','','@UserManager.GetUserId(User)')">price_asc</a>|
-                <a onclick="updateData(this, '@ViewData["CurrentFilter"]','','@UserManager.GetUserId(User)')">price_desc</a>
+                <a onclick="updateData(this,'','@UserManager.GetUserId(User)')">price_asc</a>|
+                <a onclick="updateData(this,'','@UserManager.GetUserId(User)')">price_desc</a>
             </li>
             <li class="list-group-item text-left">
                 CreatedOn
                 <br />
-                <a onclick="updateData(this, '@ViewData["CurrentFilter"]','','@UserManager.GetUserId(User)')">date_asc</a>|
-                <a onclick="updateData(this, '@ViewData["CurrentFilter"]','','@UserManager.GetUserId(User)')">date_desc</a>
+                <a onclick="updateData(this, '','@UserManager.GetUserId(User)')">date_asc</a>|
+                <a onclick="updateData(this, '','@UserManager.GetUserId(User)')">date_desc</a>
             </li>
             <li class="list-group-item text-left">
                 <form>
                     <div class="form-group">
                         <label for="inputdefault">Find by description</label>
-                        <input id="productSearchString" type="text" class="form-control" name="SearchString" value="@ViewData["currentFilter"]" />
+                        <input id="productSearchString" type="text" class="form-control" name="SearchString" />
                     </div>
                     <div class="form-group">
-                        <input type="button" value="Search" class="btn btn-default" onclick="updateData(this, '@ViewData["CurrentFilter"]','','@UserManager.GetUserId(User)')" /> |
+                        <input type="button" value="Search" class="btn btn-default" onclick="updateData(this, '','@UserManager.GetUserId(User)')" /> |
                         <a asp-action="Index">Back to Full List</a>
                     </div>
                 </form>
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="form-check">
+                        <input id="forOwner" type="checkbox" onclick="updateData(this, '','@UserManager.GetUserId(User)')" class="form-check-input" id="forOwner">
+                        <label class="form-check-label">Show my items</label>
+                    </div>
+                }
             </li>
         </ul>
         @if (User.IsInRole("Admin"))
@@ -51,10 +58,10 @@
 <script>
     $('#productsList').load('@Url.Content("~/Product/ProductPartial/")');
 
-    function updateData(link, currentFilter, page, uid) {
+    function updateData(link, page, uid) {
         var sortOrder = link.innerHTML;
         var searchString = $('#productSearchString').val();
-        var forOwner = false;
+        var forOwner = $('#forOwner').is(":checked");
         if (page == '') {
             page = $('#pageIndex').val().trim();
         }
@@ -63,7 +70,6 @@
                 url: '@Url.Content("~/Product/ProductPartial/")',
                 data: {
                     sortOrder: sortOrder,
-                    currentFilter: currentFilter,
                     searchString: searchString,
                     page: page,
                     userId: uid,

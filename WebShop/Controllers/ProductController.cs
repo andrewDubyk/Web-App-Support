@@ -20,7 +20,7 @@ namespace WebShop.Controllers
         private readonly UserProfileManager<UserProfile> _userProfileManager;
         private readonly ProductsManager<Product> _productsManager;
 
-        private readonly int ITEMS_ON_PAGE = 5;
+        private readonly int ITEMS_ON_PAGE = 6;
 
         public ProductController(ApplicationDbContext context)
         {
@@ -200,15 +200,11 @@ namespace WebShop.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public PartialViewResult ProductPartial(string sortOrder, string currentFilter, string searchString, int? page, bool forOwner, string userId)
+        public PartialViewResult ProductPartial(string sortOrder, string searchString, int? page, bool forOwner, string userId)
         {
             if (searchString != null)
             {
                 page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
             }
 
             IEnumerable<Product> pr;

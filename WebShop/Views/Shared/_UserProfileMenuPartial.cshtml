@@ -20,9 +20,8 @@
                 <li class="@UserProfileMenuNavPages.UserProfileNavClass(ViewContext)"><a asp-controller="UserProfile" asp-action="ManageUserProfile"><i class="fa fa-universal-access" style="font-size:18px;color:white"></i> Manage User profile</a></li>
                 @if (User.IsInRole("Admin"))
                 {
-                    <li class="@UserProfileMenuNavPages.SendEmailNavClass(ViewContext)"><a asp-controller="UserProfile" asp-action="SendEmail"><i class="fa fa-universal-access" style="font-size:18px;color:white"></i> Send Emails</a></li>
+                    <li class="@UserProfileMenuNavPages.SendEmailNavClass(ViewContext)"><a asp-controller="UserProfile" asp-action="SendEmail"><i class="fa fa-envelope" style="font-size:18px;color:white"></i> Send Emails</a></li>
                 }
-
                 <li><button type="submit" class="btn btn-success"><i class="fa fa-outdent"></i> Log out</button></li>
             </ul>
         </form>

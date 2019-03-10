@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebShop</title>
+    <title>@ViewData["Title"] - Auto Web Shop</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/navbar-fixed-side.css" />
-        <link rel="stylesheet" href="~/lib/Font-Awesome/web-fonts-with-css/css/fontawesome-all.min.css"/>
+        <link rel="stylesheet" href="~/lib/Font-Awesome/web-fonts-with-css/css/fontawesome-all.min.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -47,8 +47,8 @@
     {
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-3 col-lg-2" style="padding:0px;margin:0px;">
-                    <nav class="navbar navbar-default navbar-fixed-side" style="background-color:#eee; padding-left:10px;" >
+                <div class="col-sm-3 col-md-3 col-lg-2" style="padding-left: 3px;">
+                    <nav class="navbar navbar-default navbar-fixed-side">
                         @await Html.PartialAsync("_UserProfileMenuPartial.cshtml")
                     </nav>
                 </div>
@@ -56,6 +56,10 @@
                     <div class="body-content">
                         @RenderBody()
                     </div>
+                    <hr />
+                    <footer>
+                        <p>&copy; 2019 - Auto Web Shop</p>
+                    </footer>
                 </div>
             </div>
         </div>
@@ -71,7 +75,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a id="brand" asp-area="" asp-controller="Home" asp-action="Main" class="navbar-brand">WebShop</a>
+                    <a id="brand" asp-area="" asp-controller="Home" asp-action="Main" class="navbar-brand">Auto Web Shop</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -87,7 +91,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; 2018 - WebShop</p>
+                <p>&copy; 2019 - Auto Web Shop</p>
             </footer>
         </div>
     }
