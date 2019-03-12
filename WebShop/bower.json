@@ -1,7 +1,0 @@
-{
-  "name": "asp.net",
-  "private": true,
-  "dependencies": {
-    "Font-Awesome": "fontawesome#5.0.10"
-  }
-}

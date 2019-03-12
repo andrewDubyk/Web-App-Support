@@ -119,11 +119,11 @@ namespace WebShop.Managers
             }
 
             string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            string filePath = Path.Combine(webRootPath, "UserProfile" + "\\" + FOLDERSSTRUCTURE + "\\" + filename);
+            string filePath = Path.Combine(webRootPath, "UserProfile", FOLDERSSTRUCTURE ,filename);
 
-            if (!Directory.Exists(webRootPath + "UserProfile" + "\\" + FOLDERSSTRUCTURE))
+            if (!Directory.Exists(webRootPath + "\\" + "UserProfile" + "\\" + FOLDERSSTRUCTURE))
             {
-                Directory.CreateDirectory(webRootPath + "UserProfile" + "\\" + FOLDERSSTRUCTURE);
+                Directory.CreateDirectory(webRootPath + "\\" + "UserProfile" + "\\" + FOLDERSSTRUCTURE);
             }
 
             using (FileStream fs = File.Create(filePath))
