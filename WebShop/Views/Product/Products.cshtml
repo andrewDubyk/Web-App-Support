@@ -1,0 +1,102 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Products";
+    var uid = UserManager.GetUserId(User);
+    ViewData.AddActivePage(UserProfileMenuNavPages.Products);
+}
+
+<br /><br />
+<div class="row">
+    <div class="col-sm-3">
+        <ul class="list-group">
+            <li class="list-group-item text-muted" contenteditable="false">Filters</li>
+            <li class="list-group-item text-left">
+                Price<br />
+                <a onclick="updateData(this,'','@UserManager.GetUserId(User)')">price_asc</a>|
+                <a onclick="updateData(this,'','@UserManager.GetUserId(User)')">price_desc</a>
+            </li>
+            <li class="list-group-item text-left">
+                CreatedOn
+                <br />
+                <a onclick="updateData(this, '','@UserManager.GetUserId(User)')">date_asc</a>|
+                <a onclick="updateData(this, '','@UserManager.GetUserId(User)')">date_desc</a>
+            </li>
+            <li class="list-group-item text-left">
+                <form>
+                    <div class="form-group">
+                        <label for="inputdefault">Find by description</label>
+                        <input id="productSearchString" type="text" class="form-control" name="SearchString" />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Search" class="btn btn-default" onclick="updateData(this, '','@UserManager.GetUserId(User)')" /> |
+                        <a asp-action="Products">Back to Full List</a>
+                    </div>
+                </form>
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="form-check">
+                        <input id="forOwner" type="checkbox" onclick="updateData(this, '','@UserManager.GetUserId(User)')" class="form-check-input" id="forOwner">
+                        <label class="form-check-label">Show my items</label>
+                    </div>
+                }
+            </li>
+        </ul>
+        @if (User.IsInRole("Admin"))
+        {
+            <h3>
+                @Html.ActionLink("Add new product", "Create")
+            </h3>
+        }
+    </div>
+
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div id="productsList"></div>
+    </div>
+</div>
+
+<script>
+    $('#productsList').load('@Url.Content("~/Product/ProductPartial/")');
+
+    function updateData(link, page, uid) {
+        var sortOrder = link.innerHTML;
+        var searchString = $('#productSearchString').val();
+        var forOwner = $('#forOwner').is(":checked");
+        if (page == '') {
+            page = $('#pageIndex').val().trim();
+        }
+            $.ajax({
+                type: "GET",
+                url: '@Url.Content("~/Product/ProductPartial/")',
+                data: {
+                    sortOrder: sortOrder,
+                    searchString: searchString,
+                    page: page,
+                    userId: uid,
+                    forOwner: forOwner
+                },
+                success: function (result) {
+                    $('#productsList').html(result);
+                }
+            });
+    }
+
+    function addToCart(idx,id) {
+        if (id == null)
+            return;
+
+        var liId = "#cartStatus" + idx;
+         $.ajax({
+            type: "POST",
+            url: '@Url.Content("~/Cart/AddProduct/")',
+            data: {
+                id : id
+            },
+             success: function (result) {
+                 if (result == true) {
+                     $(liId).html('<i class="fa fa-check fa-1x" style="color:green"></i>');
+                 }
+             }
+    });
+    }
+</script>

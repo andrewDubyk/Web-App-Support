@@ -1,0 +1,78 @@
+﻿@model WebShop.Extensions.PaginatedList<ProductViewModel>
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var index = 0;
+}
+
+<div>
+    @if (Model.Count == 0)
+    {
+        <h1>No items found ...</h1>
+    }
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <div class="caption text-center">
+                        <div class="position-relative">
+                            <img src="~/images/img-clean-car.png" style="width:72px;height:72px;" />
+                        </div>
+                        <h4 id="thumbnail-label"><a href="https://flow.microsoft.com/en-us/connectors/shared_slack/slack/" target="_blank">@item.Title</a></h4>
+                        <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp;Admin</p>
+                        <div class="thumbnail-description smaller">@item.Description</div>
+                    </div>
+                    <p class="text-center">Price : @item.Price $</p>
+                    <div class="caption card-footer">
+                        <ul class="list-inline text-center">
+                            <li><a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId" class="fa fa-eye fa-1x" title="Details"></a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                var liId = "cartStatus" + index.ToString();
+                                <li id="@liId">
+                                    @if (!item.IsInCart)
+                                    {
+                                        <a onclick="addToCart('@index','@item.ProductId')" class="fa fa-shopping-cart fa-1x" title="Add to cart"></a>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-check fa-1x" style="color:green" title="Already in cart"></i>
+                                    }
+                                </li>
+                            }
+                            @if (User.IsInRole(Roles.Admin.ToString()))
+                            {
+                                <li><a asp-controller="Product" asp-action="Edit" asp-route-id="@item.ProductId" class="fa fa-edit fa-1x" title="Edit"></a></li>
+                                <li><a asp-controller="Product" asp-action="Delete" asp-route-id="@item.ProductId" class="fa fa-trash fa-1x" title="Dlete"></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            index++;
+            if (index % 4 == 3)
+            {
+                <div class="clearfix"></div>
+            }
+        }
+    </div>
+</div>
+
+<div class="center-block text-center">
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a onclick="updateData(this,'@(Model.PageIndex - 1)','@UserManager.GetUserId(User)')"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a id="pageIndex" style="cursor: default;text-decoration: none;">  @Model.PageIndex  </a>
+    <a onclick="updateData(this,'@(Model.PageIndex + 1)','@UserManager.GetUserId(User)')"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+</div>

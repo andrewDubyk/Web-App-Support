@@ -1,0 +1,300 @@
+﻿body {
+    padding: 0px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+/* content padding*/
+
+.content-padding-xs {
+    padding-top: 40px;
+}
+
+.content-padding-sm {
+    padding-top: 80px;
+}
+
+.content-padding-md {
+    padding-top: 95px;
+}
+
+.content-padding-lg {
+    padding-top: 110px;
+}
+
+/* header*/
+
+.white-text {
+    color: #FFF;
+}
+
+/* --  navbar  -- */
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-fixed-top {
+    height: 80px;
+    font-size: 18px;
+    padding-top: 10px;
+    -webkit-transition: height .5s, line-height .5s;
+    transition: height .5s, line-height .5s;
+}
+
+    .navbar-fixed-top.scrolled {
+        height: 50px !important;
+        font-size: 16px;
+        padding: 0px;
+    }
+
+        .navbar-fixed-top.scrolled li a {
+            color: #080808;
+        }
+
+            .navbar-fixed-top.scrolled li a:hover {
+                color: #438f5f;
+            }
+
+.navbar-right.dropdown li a {
+    color: rgba(0,0,0,1);
+}
+
+/* --  navbar right  -- */
+.navbar-fixed-top.scrolled .navbar-right button {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.navbar-fixed-top.scrolled .navbar-right .scroll-black {
+    color: black;
+}
+
+.navbar.navbar-fixed-top.fixed-theme {
+    background-color: #222;
+    border-color: #080808;
+    box-shadow: 0 0 5px rgba(0,0,0,.8);
+}
+
+.navbar-brand.fixed-theme {
+    font-size: 18px;
+}
+
+.navbar-container.fixed-theme {
+    padding: 0;
+}
+
+.navbar-brand.fixed-theme,
+.navbar-container.fixed-theme,
+.navbar.navbar-fixed-top.fixed-theme,
+.navbar-brand,
+.navbar-container {
+    transition: 0.8s;
+    -webkit-transition: 0.8s;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+    }
+
+
+/* -- navbar right collapsed -- */
+@media only screen and (max-width: 768px) {
+    .nav > li > a.dropdown-toggle {
+        display: none;
+    }
+
+    .nav .dropdown-menu {
+        display: block;
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        margin-bottom: 15px;
+        background-color: transparent;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+        .nav .dropdown-menu li {
+            float: left;
+        }
+
+    .navbar-right.dropdown li a {
+        color: #FFF;
+    }
+
+    /* --  navbar right  -- */
+    .navbar-fixed-top .navbar-right button.scroll-black {
+        color: #FFF;
+        text-decoration: none;
+        position: relative;
+        top: -5px;
+    }
+
+    .navbar-fixed-top.scrolled .navbar-right .scroll-black {
+        color: #FFF;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .navbar-fixed-top {
+        padding: 0;
+        height: 60px;
+    }
+
+        .navbar-fixed-top.scrolled {
+            height: 40px !important;
+        }
+
+    .navbar-default .navbar-collapse {
+        background-color: #05060a;
+    }
+}
+
+@media only screen and (max-width: 676px) {
+
+    .navbar-default .navbar-collapse {
+        font-size: 10px;
+    }
+
+    #navbar {
+        height: 100vh !important;
+        overflow-y: scroll !important;
+    }
+
+        #navbar .navbar-right {
+            margin-bottom: 50px;
+        }
+}
+
+@media only screen and (max-width: 426px) {
+
+    .navbar-default .navbar-collapse li {
+        float: left;
+        font-size: 8px;
+    }
+}
+
+/* -- section  -- */
+
+.md-padding {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.sm-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.xs-padding {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Profile container */
+.profile {
+    margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+    overflow-x: hidden;
+    padding: 10px 0 10px 0;
+    background: #438f5f;
+}
+
+.profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+/*manage nav*/
+ul.white-li li a {
+    color: #130505;
+}
+
+/*user menu nav*/
+ul.left-side-nav li a {
+    color: azure;
+}
+
+.nav.left-side-nav > li > a.active,
+.nav > li > a:hover,
+.nav > li > a:focus {
+    background-color: #0b500b;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover {
+    color: rgba(232,236,255,1);
+}
+
+.nav.left-side-nav li > button {
+    color: rgba(232,236,255,1);
+}
+
+    .nav.left-side-nav li > button:hover {
+        background-color: rgba(0,128,128,1);
+    }
+
+thumbnail {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+   
+    border-radius: 5px;
+    height: 100%;
+}
+
+.thumbnail-description {
+    min-height: 40px;
+}
+
+.thumbnail:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+}
+

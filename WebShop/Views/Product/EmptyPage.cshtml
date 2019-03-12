@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    //ViewData.AddActivePage(UserProfileMenuNavPages.AllAssigments);
+}
+
+<h2 class="text-center">There is no products to show!</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}

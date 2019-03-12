@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData.AddActivePage(UserProfileMenuNavPages.CartDetails);
+    var index = 0;
+}
+
+<h2>Items in your cart</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var rtId = "item" + index.ToString();
+        <tr id="@rtId">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)$
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-info">Details</a>
+                <button type="button" class="btn btn-danger" onclick="removeFromCart('@index','@item.ProductId')">Remove</button>
+            </td>
+        </tr> 
+         index++; 
+      }
+
+</table>
+
+<script>
+    function removeFromCart(idx,id) {
+        var trId = "#item" + idx;
+        $.ajax({
+            type: "DELETE",
+            url: '@Url.Content("~/Cart/RemoveProduct/")',
+            data: {
+                id : id
+            },
+             success: function (result) {
+                 if (result == true) {
+                     $(trId).remove();
+                 }
+             }
+    });
+    }
+</script>

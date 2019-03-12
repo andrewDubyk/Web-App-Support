@@ -1,0 +1,40 @@
+﻿@model WebShop.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData.AddActivePage(UserProfileMenuNavPages.CartDetails);
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="col-lg-8">
+        <h1 class="mt-4">@Model.Title</h1>
+        <p class="lead">
+            Posted on @Model.CreatedOn by
+            <a href="#">Admin</a>
+        </p>
+        <hr>
+        <h3>Description</h3>
+        <p class="lead">@Model.Description</p>
+        <hr>
+        <p class="lead">Price : @Model.Price $</p>
+        <hr>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> <text>|</text>
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.ProductId">Delete</a> <text>|</text>
+        }
+        <a class="btn btn-info" asp-action="Products">Back to List</a>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <h2 class="mt-4">Information</h2>
+            <div class="card-body">
+                Here you can view the details of this product or service.<br />
+                Add item to card if you are intended to buy it.
+            </div>
+        </div>
+    </div>
+</div>
